@@ -1,103 +1,108 @@
-import Image from "next/image";
+import { Metadata } from 'next'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
+import { HeroSection } from '@/components/sections/hero-section'
+import { GameEmbedSection } from '@/components/sections/game-embed-section'
+import { GameFeaturesSection } from '@/components/sections/game-features-section'
+import { HowToPlaySection } from '@/components/sections/how-to-play-section'
+import { ProTipsSection } from '@/components/sections/pro-tips-section'
+import { FAQSection } from '@/components/sections/faq-section'
+import { CTASection } from '@/components/sections/cta-section'
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// 生成动态元数据以优化SEO
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Slice Master - Play Free Online Knife Throwing Game | Precision Slicing Game"
+  const description = "Play Slice Master, the addictive one-button knife throwing game! Slice fruits, shapes, and objects with precision timing. Unlock new blades, earn coins, and master the art of slicing. Play free online now!"
+  const keywords = [
+    "slice master",
+    "slice master game", 
+    "knife throwing game",
+    "online slicing game",
+    "free browser game",
+    "precision timing game",
+    "casual arcade game",
+    "slice master online",
+    "knife game free",
+    "slicing simulator",
+    "blade throwing game",
+    "slice master unblocked",
+    "one button game",
+    "ASMR slicing game"
+  ]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  return {
+    title,
+    description,
+    keywords: keywords.join(', '),
+    authors: [{ name: 'Slice Master Game' }],
+    creator: 'Slice Master',
+    publisher: 'Slice Master Game Studio',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL('https://slice-master.cc'),
+    alternates: {
+      canonical: '/',
+    },
+    openGraph: {
+      title,
+      description,
+      url: '/',
+      siteName: 'Slice Master Game',
+      locale: 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: '/slice-master-og.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Slice Master - Free Online Knife Throwing Game',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/slice-master-twitter.jpg'],
+      creator: '@SliceMasterGame',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    verification: {
+      google: 'your-google-verification-code',
+    },
+  }
 }
+
+export default function SliceMasterPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
+      <Header />
+      
+      <HeroSection />
+
+      <main className="container mx-auto px-4 space-y-16 lg:space-y-24">
+        <GameEmbedSection />
+        <GameFeaturesSection />
+        <HowToPlaySection />
+        <ProTipsSection />
+        <FAQSection />
+        <CTASection />
+      </main>
+
+      <Footer />
+    </div>
+  )
+} 
