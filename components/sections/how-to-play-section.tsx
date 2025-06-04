@@ -47,7 +47,7 @@ export function HowToPlaySection() {
                 </li>
                 <li className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl">
                   <span className="text-blue-600">!</span>
-                  <span>Don't slice the white walls</span>
+                  <span>Don&apos;t slice the white walls</span>
                 </li>
                 <li className="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl">
                   <span className="text-yellow-600">🎯</span>

@@ -15,7 +15,7 @@ export function ProTipsSection() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 leading-relaxed">
-              Stay away from pink spiked metal shapes - they're too strong for your knife and will reset your progress to the beginning of the round.
+              Stay away from pink spiked metal shapes - they&apos;re too strong for your knife and will reset your progress to the beginning of the round.
             </p>
           </CardContent>
         </Card>
@@ -41,7 +41,7 @@ export function ProTipsSection() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 leading-relaxed">
-              White pillars can't be cut, but you can use them as a safety net to prevent your knife from hitting the ground.
+              White pillars can&apos;t be cut, but you can use them as a safety net to prevent your knife from hitting the ground.
             </p>
           </CardContent>
         </Card>

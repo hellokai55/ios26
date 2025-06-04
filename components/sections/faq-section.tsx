@@ -20,7 +20,7 @@ export function FAQSection() {
                 <span className="group-open:rotate-180 transition-transform text-gray-500">▼</span>
               </summary>
               <div className="p-6 pt-0 text-gray-600 leading-relaxed">
-                When you reach the end of each level, make sure to hit the numbered targets to multiply your points. The higher the number, the more points you'll receive, so always aim for the highest multiplier available.
+                When you reach the end of each level, make sure to hit the numbered targets to multiply your points. The higher the number, the more points you&apos;ll receive, so always aim for the highest multiplier available.
               </div>
             </details>
 
