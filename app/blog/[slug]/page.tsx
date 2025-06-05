@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
-import { getPostBySlug, getAllPostSlugs, renderMarkdown, getRecentPosts } from '@/lib/blog'
+import { getPostBySlug, getAllPostSlugs, renderMarkdown, getRecentPosts, BlogPost, BlogPostMeta } from '@/lib/blog'
 
 // 生成静态参数
 export async function generateStaticParams() {
@@ -34,7 +34,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const title = `${post.title} - Slice Master Blog`
   const description = post.description
-  const url = `https://slice-master.cc/blog/${slug}`
   
   return {
     title,
@@ -92,7 +91,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 // 生成文章结构化数据
-function generateArticleStructuredData(post: any, relatedPosts: any[]) {
+function generateArticleStructuredData(post: BlogPost, relatedPosts: BlogPostMeta[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -135,7 +134,7 @@ function generateArticleStructuredData(post: any, relatedPosts: any[]) {
 }
 
 // 生成面包屑结构化数据
-function generateBreadcrumbStructuredData(post: any) {
+function generateBreadcrumbStructuredData(post: BlogPost) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

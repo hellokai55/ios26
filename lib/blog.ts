@@ -207,7 +207,7 @@ export function renderMarkdown(content: string): string {
         inList = false
       }
       // 处理粗体文本和链接
-      let processedLine = line
+      const processedLine = line
         .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-800">$1</strong>')
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-red-600 hover:text-red-700 underline">$1</a>')
       

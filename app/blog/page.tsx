@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
-import { getAllPosts, getFeaturedPosts, getAllCategories } from '@/lib/blog'
+import { getAllPosts, getFeaturedPosts, getAllCategories, BlogPostMeta } from '@/lib/blog'
 import BlogClientPage from './blog-client'
 
 // SEO优化的博客页面元数据
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Slice Master Blog - Game Tips, Strategies & Guides"
   const description = "Master Slice Master with our expert guides, tips, and strategies. Learn advanced techniques, unlock all blades, and achieve high scores in this addictive knife throwing game."
-  const url = 'https://slice-master.cc/blog'
   
   return {
     title,
@@ -62,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // 生成结构化数据
-function generateBlogStructuredData(posts: any[]) {
+function generateBlogStructuredData(posts: BlogPostMeta[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
