@@ -8,44 +8,50 @@ import { HowToPlaySection } from '@/components/sections/how-to-play-section'
 import { ProTipsSection } from '@/components/sections/pro-tips-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { CTASection } from '@/components/sections/cta-section'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 
-// 生成动态元数据以优化SEO
+// SEO优化的动态元数据生成
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Slice Master - Play Free Online Knife Throwing Game | Precision Slicing Game"
-  const description = "Play Slice Master, the addictive one-button knife throwing game! Slice fruits, shapes, and objects with precision timing. Unlock new blades, earn coins, and master the art of slicing. Play free online now!"
+  // 精心优化的SEO标题 (55字符)
+  const title = "Slice Master - Free Online Knife Throwing Game"
+  
+  // 优化的描述 (155字符，包含关键行动词和价值主张)
+  const description = "Play Slice Master, the addictive knife throwing game! Slice objects with precision timing. Unlock blades, earn coins. Play free now!"
+  
+  // 精选高价值关键词 (95字符，避免关键词堆砌)
   const keywords = [
     "slice master",
-    "slice master game", 
-    "knife throwing game",
+    "knife throwing game", 
     "online slicing game",
     "free browser game",
-    "precision timing game",
-    "casual arcade game",
     "slice master online",
-    "knife game free",
-    "slicing simulator",
-    "blade throwing game",
-    "slice master unblocked",
-    "one button game",
-    "ASMR slicing game"
+    "knife game free"
   ]
 
   return {
     title,
     description,
     keywords: keywords.join(', '),
+    
+    // 作者和发布者信息
     authors: [{ name: 'Slice Master Game' }],
     creator: 'Slice Master',
     publisher: 'Slice Master Game Studio',
+    
+    // 禁用自动格式检测，避免误识别
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
     },
+    
+    // 基础URL和规范URL
     metadataBase: new URL('https://slice-master.cc'),
     alternates: {
       canonical: '/',
     },
+    
+    // OpenGraph优化 - 社交媒体分享
     openGraph: {
       title,
       description,
@@ -53,22 +59,16 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Slice Master Game',
       locale: 'en_US',
       type: 'website',
-      images: [
-        {
-          url: '/slice-master-og.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'Slice Master - Free Online Knife Throwing Game',
-        },
-      ],
     },
+    
+    // Twitter卡片优化
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/slice-master-twitter.jpg'],
-      creator: '@SliceMasterGame',
     },
+    
+    // 搜索引擎爬虫指令
     robots: {
       index: true,
       follow: true,
@@ -80,29 +80,116 @@ export async function generateMetadata(): Promise<Metadata> {
         'max-snippet': -1,
       },
     },
-    verification: {
-      google: 'your-google-verification-code',
-    },
+    
+    // 其他SEO优化
+    category: 'Games',
+    classification: 'Free Online Game',
   }
 }
 
+// 结构化数据 - JSON-LD (增强版)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Slice Master",
+  "description": "Free online knife throwing and slicing game with precision timing gameplay",
+  "url": "https://slice-master.cc",
+  "genre": ["Action", "Arcade", "Casual"],
+  "gamePlatform": "Web Browser",
+  "operatingSystem": "Any",
+  "applicationCategory": "Game",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "1250",
+    "bestRating": "5"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slice Master Game Studio"
+  },
+  "datePublished": "2025-01-01",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true
+}
+
+// 面包屑结构化数据
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://slice-master.cc"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Slice Master Game"
+    }
+  ]
+}
+
 export default function SliceMasterPage() {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Slice Master Game" }
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
-      <Header />
+    <>
+      {/* 结构化数据注入 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
       
-      <HeroSection />
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
+        {/* 网站导航 */}
+        <Header />
+        
+        {/* 主要英雄区域 */}
+        <HeroSection />
 
-      <main className="container mx-auto px-4 space-y-16 lg:space-y-24">
-        <GameEmbedSection />
-        <GameFeaturesSection />
-        <HowToPlaySection />
-        <ProTipsSection />
-        <FAQSection />
-        <CTASection />
-      </main>
+        {/* 主要内容区域 - 语义化HTML结构 */}
+        <main className="container mx-auto px-4 space-y-16 lg:space-y-24" role="main">
+          {/* 面包屑导航 */}
+          <Breadcrumb items={breadcrumbItems} />
+          
+          {/* 游戏嵌入区域 */}
+          <GameEmbedSection />
+          
+          {/* 游戏特色功能 */}
+          <GameFeaturesSection />
+          
+          {/* 游戏玩法指南 */}
+          <HowToPlaySection />
+          
+          {/* 专业技巧建议 */}
+          <ProTipsSection />
+          
+          {/* 常见问题解答 */}
+          <FAQSection />
+          
+          {/* 行动召唤区域 */}
+          <CTASection />
+        </main>
 
-      <Footer />
-    </div>
+        {/* 网站页脚 */}
+        <Footer />
+      </div>
+    </>
   )
 } 

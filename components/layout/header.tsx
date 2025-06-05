@@ -7,9 +7,9 @@ export function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="text-3xl">🔪</div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+            <div className="text-xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
               Slice Master
-            </h1>
+            </div>
           </div>
           
           {/* Desktop Navigation */}

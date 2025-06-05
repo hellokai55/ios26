@@ -19,9 +19,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%231f2937;stop-opacity:1' /><stop offset='50%25' style='stop-color:%23374151;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23111827;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' fill='url(%23bg)' rx='22'/><text x='50' y='68' font-size='45' text-anchor='middle' font-family='system-ui'>🔪</text></svg>" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#1f2937" />
+        
+        {/* Google AdSense - 自动广告 */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1977656246202122"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
