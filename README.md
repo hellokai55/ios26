@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 博客文章管理说明
 
-## Getting Started
+## 如何添加新的博客文章
 
-First, run the development server:
+1. 在 `content/blog/` 目录下创建一个新的 `.md` 文件
+2. 文件名将作为文章的 URL slug（例如：`my-article.md` → `/blog/my-article`）
+3. 文件开头必须包含 frontmatter（YAML 格式的元数据）
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Frontmatter 格式
+
+每个 Markdown 文件的开头必须包含以下格式的 frontmatter：
+
+```yaml
+---
+title: 文章标题
+description: 文章描述（用于SEO和摘要）
+category: 分类名称
+readTime: 阅读时间（如：5 min read）
+publishDate: 发布日期（YYYY-MM-DD格式）
+author: 作者名称
+tags: [标签1, 标签2, 标签3]
+featured: true/false（是否为特色文章）
+---
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 文章内容格式
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+frontmatter 后面直接写 Markdown 格式的文章内容：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 支持标题（# ## ###）
+- 支持粗体文本（**文本**）
+- 支持列表（- 项目）
+- 支持数字列表（1. 项目）
+- 支持链接（[文本](URL)）
 
-## Learn More
+## 示例文件
 
-To learn more about Next.js, take a look at the following resources:
+参考 `slice-master-complete-guide.md` 和 `unlock-all-blades-guide.md` 文件的格式。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 自动功能
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 文章会自动出现在博客列表页面
+- 特色文章（featured: true）会显示在特色区域
+- 自动生成 sitemap
+- 自动生成 SEO 元数据
+- 自动按发布日期排序 

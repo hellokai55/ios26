@@ -1,15 +1,17 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://slice-master.cc'
-  
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/admin/'], // 禁止爬取API和管理页面
+      disallow: [
+        '/api/',
+        '/admin/',
+        '/_next/',
+        '/private/',
+      ],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: 'https://slice-master.cc/sitemap.xml',
   }
 } 

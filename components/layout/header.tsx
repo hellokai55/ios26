@@ -29,6 +29,11 @@ export function Header() {
               <span className="hidden lg:inline">How to Play</span>
               <span className="lg:hidden">Guide</span>
             </a>
+            <a href="/blog" className="text-gray-600 hover:text-red-600 transition-colors font-medium flex items-center gap-1">
+              <span className="text-sm">📚</span>
+              <span className="hidden lg:inline">Blog</span>
+              <span className="lg:hidden">Blog</span>
+            </a>
             <a href="#pro-tips" className="text-gray-600 hover:text-red-600 transition-colors font-medium flex items-center gap-1">
               <span className="text-sm">💡</span>
               <span className="hidden lg:inline">Tips</span>
@@ -63,6 +68,10 @@ export function Header() {
                 <a href="#how-to-play" className="block px-4 py-3 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
                   <span>🎯</span>
                   How to Play
+                </a>
+                <a href="/blog" className="block px-4 py-3 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
+                  <span>📚</span>
+                  Blog
                 </a>
                 <a href="#pro-tips" className="block px-4 py-3 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
                   <span>💡</span>
