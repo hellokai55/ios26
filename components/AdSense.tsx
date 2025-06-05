@@ -10,9 +10,14 @@ interface AdSenseProps {
   className?: string;
 }
 
+// AdSense广告配置类型
+interface AdSenseConfig {
+  [key: string]: string | number | boolean | undefined;
+}
+
 declare global {
   interface Window {
-    adsbygoogle: any[];
+    adsbygoogle: AdSenseConfig[];
   }
 }
 
