@@ -83,7 +83,7 @@ export function Header() {
                   FAQ
                 </Link>
                 <div className="border-t border-gray-100 mt-2 pt-2">
-                  <a href="mailto:hellokevinus@gmail.com" className="block px-4 py-3 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
+                  <a href="mailto:hellokaius@gmail.com" className="block px-4 py-3 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
                     <span>📧</span>
                     Contact
                   </a>

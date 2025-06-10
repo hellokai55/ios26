@@ -42,8 +42,8 @@ export function Footer() {
             <div className="space-y-3 text-gray-300">
               <div className="flex items-center gap-2">
                 <span className="text-red-400">📧</span>
-                <a href="mailto:hellokevinus@gmail.com" className="hover:text-red-400 transition-colors">
-                  hellokevinus@gmail.com
+                <a href="mailto:hellokaius@gmail.com" className="hover:text-red-400 transition-colors">
+                  hellokaius@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -58,7 +58,24 @@ export function Footer() {
           </div>
         </div>
         
-        <Separator className="bg-gray-700 mb-8" />
+        {/* Legal Links */}
+        <div className="mt-8 pt-6 border-t border-gray-700">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+            <Link href="/privacy" className="hover:text-red-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/terms" className="hover:text-red-400 transition-colors">
+              Terms of Service
+            </Link>
+            <span>•</span>
+            <Link href="/blog" className="hover:text-red-400 transition-colors">
+              Game Guides
+            </Link>
+          </div>
+        </div>
+        
+        <Separator className="bg-gray-700 my-8" />
         
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
