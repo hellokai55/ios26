@@ -2,26 +2,26 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Slice Master - Ultimate Knife Throwing Game',
-    short_name: 'Slice Master',
-    description: 'Master the art of knife throwing in this addictive slicing game. Unlock blades, achieve high scores, and become the ultimate Slice Master.',
+    name: 'iOS 26 - Apple\'s Revolutionary Mobile Operating System',
+    short_name: 'iOS 26',
+    description: 'Complete guide to iOS 26 featuring Liquid Glass design, Apple Intelligence, and comprehensive device compatibility information.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#dc2626',
+    background_color: '#000000',
+    theme_color: '#007AFF',
     icons: [
       {
-        src: '/icon-192x192.png',
+        src: '/android-chrome-192x192.png',
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/icon-512x512.png',
+        src: '/android-chrome-512x512.png',
         sizes: '512x512',
         type: 'image/png',
       },
     ],
-    categories: ['games', 'entertainment', 'action'],
+    categories: ['technology', 'mobile', 'apple', 'ios'],
     lang: 'en',
     orientation: 'portrait',
   }

@@ -1,341 +1,261 @@
 import { Metadata } from 'next'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { 
+  Apple, 
+  ArrowLeft,
+  Calendar,
+  Clock,
+  ExternalLink,
+  Sparkles,
+  Zap,
+  MessageSquare,
+  Share2,
+  User
+} from "lucide-react"
+import Link from "next/link"
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
-import { Breadcrumb } from '@/components/ui/breadcrumb'
-import { getPostBySlug, getAllPostSlugs, renderMarkdown, getRecentPosts, BlogPost, BlogPostMeta } from '@/lib/blog'
+import { getPostBySlug, getAllPosts, renderMarkdown } from '@/lib/blog'
 
 // 生成静态参数
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs()
-  return slugs.map((slug) => ({
-    slug,
+  const posts = getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
   }))
 }
 
-// 动态生成SEO元数据
+// 生成元数据
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   
   if (!post) {
     return {
-      title: 'Post Not Found - Slice Master Blog',
+      title: 'Post Not Found',
       description: 'The requested blog post could not be found.',
-      robots: {
-        index: false,
-        follow: false,
-      },
     }
   }
 
-  const title = `${post.title} - Slice Master Blog`
-  const description = post.description
-  
   return {
-    title,
-    description,
-    keywords: [
-      ...post.tags,
-      'slice master',
-      'knife throwing game',
-      'game guide',
-      'gaming tips'
-    ].join(', '),
-    metadataBase: new URL('https://slice-master.cc'),
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
+    title: `${post.title} | iOS 26 Blog`,
+    description: post.description,
+    keywords: `iOS 26, ${post.category}, Apple, iPhone, ${post.tags.join(', ')}`,
     openGraph: {
-      title,
-      description,
-      url: `/blog/${slug}`,
-      siteName: 'Slice Master Game',
+      title: post.title,
+      description: post.description,
       type: 'article',
-      locale: 'en_US',
       publishedTime: post.publishDate,
-      modifiedTime: post.publishDate,
       authors: [post.author],
-      tags: post.tags,
-      section: post.category,
-      images: [
-        {
-          url: `/og-blog-${slug}.jpg`,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
-      images: [`/og-blog-${slug}.jpg`],
+      title: post.title,
+      description: post.description,
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  }
-}
-
-// 生成文章结构化数据
-function generateArticleStructuredData(post: BlogPost, relatedPosts: BlogPostMeta[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    image: `https://slice-master.cc/og-blog-${post.slug}.jpg`,
-    author: {
-      '@type': 'Person',
-      name: post.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Slice Master Game',
-      url: 'https://slice-master.cc',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://slice-master.cc/logo.png',
-      },
-    },
-    datePublished: post.publishDate,
-    dateModified: post.publishDate,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://slice-master.cc/blog/${post.slug}`,
-    },
-    keywords: post.tags.join(', '),
-    articleSection: post.category,
-    wordCount: post.content.split(' ').length,
-    timeRequired: post.readTime,
-    about: {
-      '@type': 'Thing',
-      name: 'Slice Master Game',
-    },
-    mentions: relatedPosts.map(relatedPost => ({
-      '@type': 'Article',
-      name: relatedPost.title,
-      url: `https://slice-master.cc/blog/${relatedPost.slug}`,
-    })),
-  }
-}
-
-// 生成面包屑结构化数据
-function generateBreadcrumbStructuredData(post: BlogPost) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://slice-master.cc',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Blog',
-        item: 'https://slice-master.cc/blog',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: post.title,
-        item: `https://slice-master.cc/blog/${post.slug}`,
-      },
-    ],
   }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = getPostBySlug(slug)
-  
+
   if (!post) {
     notFound()
   }
 
-  const recentPosts = getRecentPosts(3).filter(p => p.slug !== slug)
-  
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Blog", href: "/blog" },
-    { label: post.title }
-  ]
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Design": return <Sparkles className="w-5 h-5 text-blue-600" />
+      case "AI Features": return <Zap className="w-5 h-5 text-purple-600" />
+      case "Beta": return <Apple className="w-5 h-5 text-green-600" />
+      case "Announcement": return <MessageSquare className="w-5 h-5 text-orange-600" />
+      case "Guides": return <MessageSquare className="w-5 h-5 text-green-600" />
+      default: return <MessageSquare className="w-5 h-5 text-gray-600" />
+    }
+  }
 
-  // 渲染Markdown内容
-  const htmlContent = renderMarkdown(post.content)
-
-  // 生成结构化数据
-  const articleStructuredData = generateArticleStructuredData(post, recentPosts)
-  const breadcrumbStructuredData = generateBreadcrumbStructuredData(post)
+  // 渲染 Markdown 内容
+  const renderedContent = renderMarkdown(post.content)
 
   return (
     <>
-      {/* 结构化数据 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleStructuredData),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbStructuredData),
-        }}
-      />
-      
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-12" role="main">
-          <Breadcrumb items={breadcrumbItems} />
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Apple className="w-8 h-8 text-gray-900" />
+              <span className="text-xl font-bold text-gray-900">iOS 26</span>
+            </Link>
+            <span className="text-gray-400">/</span>
+            <Link href="/blog" className="text-gray-600 hover:text-gray-900">Blog</Link>
+            <span className="text-gray-400">/</span>
+            <span className="text-gray-600 truncate max-w-48">{post.title}</span>
+          </div>
           
-          <article className="max-w-4xl mx-auto" itemScope itemType="https://schema.org/Article">
-            {/* Article Header */}
-            <header className="mb-12">
-            <div className="flex items-center gap-4 mb-6">
-              <Badge variant="secondary" className="bg-red-100 text-red-700">
-                <span itemProp="articleSection">{post.category}</span>
-              </Badge>
-              <span className="text-gray-500" itemProp="timeRequired">{post.readTime}</span>
-              {post.featured && (
-                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
-                  Featured
-                </Badge>
-              )}
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight" itemProp="headline">
-              {post.title}
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed" itemProp="description">
-              {post.description}
-            </p>
-            
-            <div className="flex items-center justify-between text-sm text-gray-500 border-b border-gray-200 pb-6">
-              <div className="flex items-center gap-4">
-                <span>By <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                  <span itemProp="name">{post.author}</span>
-                </span></span>
-                <span>•</span>
-                <time dateTime={post.publishDate} itemProp="datePublished">
-                  {new Date(post.publishDate).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })}
-                </time>
-                <meta itemProp="dateModified" content={post.publishDate} />
-              </div>
-              <div className="flex gap-2">
-                {post.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    <span itemProp="keywords">{tag}</span>
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </header>
+          <div className="flex items-center space-x-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/blog">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Blog
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </header>
 
-          {/* Article Content */}
-          <div className="prose prose-lg max-w-none mb-16">
-            <Card className="rounded-3xl shadow-lg border-0 bg-white/90 backdrop-blur-sm">
-              <CardContent className="p-8 md:p-12">
-                <div 
-                  className="article-content"
-                  itemProp="articleBody"
-                  dangerouslySetInnerHTML={{ __html: htmlContent }}
-                />
+      <main className="py-12">
+        <div className="container mx-auto px-4 max-w-4xl">
+          {/* Article Header */}
+          <article className="prose prose-lg max-w-none">
+            <header className="mb-12">
+              <div className="flex items-center space-x-4 mb-6">
+                <Badge className="bg-blue-100 text-blue-800 border-blue-200 flex items-center space-x-2">
+                  {getCategoryIcon(post.category)}
+                  <span>{post.category}</span>
+                </Badge>
+                <div className="flex items-center text-gray-500 text-sm space-x-4">
+                  <div className="flex items-center space-x-1">
+                    <Calendar className="w-4 h-4" />
+                    <span>{new Date(post.publishDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="w-4 h-4" />
+                    <span>{post.readTime}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <User className="w-4 h-4" />
+                    <span>{post.author}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                {post.title}
+              </h1>
+              
+              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                {post.description}
+              </p>
+
+              {/* Tags */}
+              {post.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {post.tags.map((tag) => (
+                    <Badge key={tag} variant="outline" className="text-xs">
+                      #{tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4 mb-8">
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <Share2 className="w-4 h-4" />
+                  <span>Share Article</span>
+                </Button>
+              </div>
+            </header>
+
+            {/* Article Content */}
+            <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-ol:text-gray-700">
+              <div dangerouslySetInnerHTML={{ __html: renderedContent }} />
+            </div>
+          </article>
+
+          {/* Related Links */}
+          <div className="mt-16">
+            <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-0">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Learn More</h3>
+                <p className="text-gray-600 mb-6">
+                  Get the latest information and official updates from Apple.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://www.apple.com/ios/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                      Official Apple iOS
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                  <a
+                    href="https://developer.apple.com/ios/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline">
+                      Developer Resources
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                  <a
+                    href="https://support.apple.com/ios"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline">
+                      Support Documentation
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Article Footer */}
-          <footer className="border-t border-gray-200 pt-8">
-            <div className="flex flex-wrap gap-2 mb-8">
-              <span className="text-gray-600 font-medium">Tags:</span>
-              {post.tags.map((tag) => (
-                <Badge key={tag} variant="outline" className="hover:bg-red-50 hover:border-red-300 transition-colors">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+          {/* Navigation */}
+          <div className="mt-12 flex justify-between items-center">
+            <Link href="/blog">
+              <Button variant="outline" className="flex items-center space-x-2">
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back to All Articles</span>
+              </Button>
+            </Link>
             
-            {/* CTA */}
-            <Card className="rounded-3xl shadow-xl bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white border-0 mb-12">
-              <CardContent className="p-8 text-center">
-                <h2 className="text-2xl font-bold mb-4">Ready to Apply These Tips?</h2>
-                <p className="text-lg mb-6 text-white/90">
-                  Put your new knowledge to the test and see how much your gameplay improves!
-                </p>
-                <Link 
-                  href="/#play-game"
-                  className="inline-block bg-white text-red-600 hover:bg-gray-50 font-semibold px-8 py-3 rounded-2xl transition-colors"
-                >
-                  🎮 Play Slice Master Now
-                </Link>
-              </CardContent>
-            </Card>
-          </footer>
-        </article>
+            <Link href="/">
+              <Button variant="outline">
+                Return to Home
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </main>
 
-        {/* Related Posts */}
-        {recentPosts.length > 0 && (
-          <section className="max-w-4xl mx-auto" aria-labelledby="related-posts">
-            <h2 id="related-posts" className="text-3xl font-bold text-gray-800 mb-8">
-              More Articles You Might Like
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {recentPosts.map((relatedPost) => (
-                <Card key={relatedPost.slug} className="rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <Badge variant="outline" className="mb-3 text-xs">
-                      {relatedPost.category}
-                    </Badge>
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2">
-                      <Link href={`/blog/${relatedPost.slug}`} className="hover:text-red-600 transition-colors">
-                        {relatedPost.title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      {relatedPost.description}
-                    </p>
-                    <div className="flex items-center justify-between text-xs text-gray-500">
-                      <span>{relatedPost.readTime}</span>
-                      <Link 
-                        href={`/blog/${relatedPost.slug}`}
-                        className="text-red-600 hover:text-red-700 font-medium"
-                      >
-                        Read →
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 mt-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Apple className="w-6 h-6" />
+              <span className="text-lg font-bold">iOS 26 Blog</span>
             </div>
-          </section>
-        )}
-        </main>
-
-        <Footer />
-      </div>
+            <p className="text-gray-400 text-sm mb-6">
+              Your source for the latest iOS 26 news and updates
+            </p>
+            <div className="flex justify-center space-x-6 text-sm text-gray-400">
+              <Link href="/" className="hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/blog" className="hover:text-white transition-colors">
+                Blog
+              </Link>
+              <a href="https://www.apple.com/ios/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Apple iOS
+              </a>
+              <a href="https://support.apple.com/ios" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   )
 } 

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://slice-master.cc'
+  const baseUrl = 'https://ios26.xyz'
   
   // 获取所有博客文章
   const posts = getAllPosts()

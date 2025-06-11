@@ -1,46 +1,85 @@
-# 博客文章管理说明
+# iOS 26 Website
 
-## 如何添加新的博客文章
+A comprehensive website about iOS 26, featuring the latest information about Apple's revolutionary mobile operating system with Liquid Glass design and Apple Intelligence.
 
-1. 在 `content/blog/` 目录下创建一个新的 `.md` 文件
-2. 文件名将作为文章的 URL slug（例如：`my-article.md` → `/blog/my-article`）
-3. 文件开头必须包含 frontmatter（YAML 格式的元数据）
+## Website: ios26.xyz
+## Contact: hellokaius@gmail.com
 
-## Frontmatter 格式
+## Features
 
-每个 Markdown 文件的开头必须包含以下格式的 frontmatter：
+- **Latest iOS 26 Information**: Complete coverage of iOS 26 features and updates
+- **Liquid Glass Design**: Information about Apple's new design language
+- **Apple Intelligence**: Deep dive into AI-powered features
+- **Device Compatibility**: Comprehensive compatibility guide
+- **SEO Optimized**: Built with Next.js for optimal search engine performance
+- **Responsive Design**: Works perfectly on all devices
+- **Blog System**: Dynamic blog with Markdown support
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with TypeScript
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui with Radix UI
+- **Content**: Markdown with gray-matter
+- **Deployment**: Optimized for Vercel
+
+## Blog Management
+
+### Adding New Blog Posts
+
+1. Create a new `.md` file in `content/blog/` directory
+2. Filename becomes the URL slug (e.g., `my-article.md` → `/blog/my-article`)
+3. Include frontmatter at the beginning of each file
+
+### Frontmatter Format
 
 ```yaml
 ---
-title: 文章标题
-description: 文章描述（用于SEO和摘要）
-category: 分类名称
-readTime: 阅读时间（如：5 min read）
-publishDate: 发布日期（YYYY-MM-DD格式）
-author: 作者名称
-tags: [标签1, 标签2, 标签3]
-featured: true/false（是否为特色文章）
+title: Article Title
+description: Article description for SEO and preview
+category: Category Name
+readTime: Reading time (e.g., 5 min read)
+publishDate: Publication date (YYYY-MM-DD format)
+author: Author name
+tags: [tag1, tag2, tag3]
+featured: true/false (whether it's a featured article)
 ---
 ```
 
-## 文章内容格式
+### Content Format
 
-frontmatter 后面直接写 Markdown 格式的文章内容：
+After frontmatter, write Markdown content:
 
-- 支持标题（# ## ###）
-- 支持粗体文本（**文本**）
-- 支持列表（- 项目）
-- 支持数字列表（1. 项目）
-- 支持链接（[文本](URL)）
+- Headers (# ## ###)
+- Bold text (**text**)
+- Lists (- item)
+- Numbered lists (1. item)
+- Links ([text](URL))
 
-## 示例文件
+## Automatic Features
 
-参考 `slice-master-complete-guide.md` 和 `unlock-all-blades-guide.md` 文件的格式。
+- Articles automatically appear on blog listing page
+- Featured articles (featured: true) display in featured section
+- Automatic sitemap generation
+- Automatic SEO metadata generation
+- Automatic sorting by publication date
 
-## 自动功能
+## Development
 
-- 文章会自动出现在博客列表页面
-- 特色文章（featured: true）会显示在特色区域
-- 自动生成 sitemap
-- 自动生成 SEO 元数据
-- 自动按发布日期排序 
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## Contact
+
+For questions or suggestions about iOS 26 content, contact: hellokaius@gmail.com 

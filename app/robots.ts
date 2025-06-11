@@ -12,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
         '/private/',
       ],
     },
-    sitemap: 'https://slice-master.cc/sitemap.xml',
+    sitemap: 'https://ios26.xyz/sitemap.xml',
   }
 } 

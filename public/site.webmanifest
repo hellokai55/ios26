@@ -1,1 +1,23 @@
-{"name":"Slice Master - Online Knife Throwing Game","short_name":"Slice Master","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#1f2937","background_color":"#1f2937","display":"standalone"}
+{
+  "name": "iOS 26 - Apple's Revolutionary Mobile Operating System",
+  "short_name": "iOS 26",
+  "description": "Complete guide to iOS 26 featuring Liquid Glass design, Apple Intelligence, and comprehensive device compatibility information.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#007AFF",
+  "background_color": "#007AFF",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait"
+}
