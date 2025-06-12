@@ -9,15 +9,16 @@ import { iOS26MainCompatibility } from "@/components/sections/ios26-main-compati
 import { iOS26MainRelease } from "@/components/sections/ios26-main-release"
 import { iOS26MainBlog } from "@/components/sections/ios26-main-blog"
 import { iOS26MainCTA } from "@/components/sections/ios26-main-cta"
+import { Disclaimer } from "@/components/disclaimer"
 
 // SEO优化的元数据生成
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "iOS 26 - The Most Advanced iPhone Operating System | Apple 2025"
-  const description = "Discover iOS 26 with revolutionary Liquid Glass design, enhanced Apple Intelligence, and groundbreaking features. Available Fall 2025 for iPhone 11 and later."
+  const title = "iOS 26 Guide - Unofficial Information Site | Independent Developer"
+  const description = "Comprehensive guide to iOS 26 features and updates. This is an unofficial information website created by independent developers, not affiliated with Apple Inc."
   const keywords = [
-    "iOS 26", "Apple", "iPhone", "Liquid Glass", "Apple Intelligence", 
-    "iOS 2025", "iPhone update", "Apple WWDC", "mobile operating system",
-    "iPhone 11", "iPhone 15 Pro", "beta program"
+    "iOS 26", "iPhone", "iOS 26 features", "iOS 26 guide", "unofficial", 
+    "iOS 26 update", "iPhone update", "iOS new features", "independent developer",
+    "not Apple official", "iOS 26 information", "iPhone system"
   ]
 
   return {
@@ -41,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: "website",
       url: "https://ios26.xyz",
-      siteName: "iOS 26 Official Guide",
+      siteName: "iOS 26 Guide - Unofficial Site",
       locale: "en_US",
       images: [
         {
@@ -88,8 +89,8 @@ const structuredData = {
       "@type": "WebSite",
       "@id": "https://ios26.xyz/#website",
       "url": "https://ios26.xyz",
-      "name": "iOS 26 Official Guide",
-      "description": "Complete guide to iOS 26 with Liquid Glass design and Apple Intelligence",
+      "name": "iOS 26 Guide - Unofficial Site",
+      "description": "Unofficial information website about iOS 26 features - not affiliated with Apple",
       "publisher": {
         "@id": "https://ios26.xyz/#organization"
       },
@@ -107,7 +108,7 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": "https://ios26.xyz/#organization",
-      "name": "iOS 26 Team",
+      "name": "iOS 26 Guide Team (Unofficial)",
       "url": "https://ios26.xyz",
       "email": "hellokaius@gmail.com",
       "logo": {
@@ -121,15 +122,14 @@ const structuredData = {
       ]
     },
     {
-      "@type": "SoftwareApplication",
-      "name": "iOS 26",
-      "operatingSystem": "iOS",
-      "applicationCategory": "OperatingSystemApplication",
+      "@type": "Article",
+      "name": "iOS 26 Information Guide",
+      "category": "Technology Guide",
       "author": {
         "@id": "https://ios26.xyz/#organization"
       },
-      "datePublished": "2025-06-09",
-      "description": "The most advanced iPhone operating system with Liquid Glass design and enhanced Apple Intelligence",
+      "datePublished": "2025-01-01",
+      "description": "Unofficial information guide about iOS 26 features and updates",
       "url": "https://ios26.xyz",
       "offers": {
         "@type": "Offer",
@@ -195,6 +195,9 @@ export default function HomePage() {
       </header>
 
       <main>
+        <div className="container mx-auto px-4 py-8">
+          <Disclaimer />
+        </div>
         {iOS26MainHero()}
         {iOS26MainFeatures()}
         {iOS26MainCompatibility()}

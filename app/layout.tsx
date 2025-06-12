@@ -6,8 +6,8 @@ import { Analytics } from '@vercel/analytics/react'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "iOS 26 - The Most Advanced iPhone Operating System | Apple 2025",
-  description: "Discover iOS 26 with revolutionary Liquid Glass design, enhanced Apple Intelligence, and groundbreaking features. Available Fall 2025 for iPhone 11 and later.",
+  title: "iOS 26 Guide - Unofficial Information Site | Independent Developer",
+  description: "Comprehensive guide to iOS 26 features and updates. This is an unofficial information website, not affiliated with Apple Inc.",
   themeColor: "#007AFF",
 }
 
