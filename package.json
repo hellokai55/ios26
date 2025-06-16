@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:cf": "npx @cloudflare/next-on-pages",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "npx wrangler pages dev .vercel/output/static --compatibility-date=2024-05-15 --compatibility-flag=nodejs_compat"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.7",
@@ -22,6 +24,7 @@
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
